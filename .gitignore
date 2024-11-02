@@ -9,6 +9,10 @@
 
 # dependencies
 /node_modules
+tsconfig.json
+tslint.json
+package-lock.json
+package.json
 
 # profiling files
 chrome-profiler-events.json
