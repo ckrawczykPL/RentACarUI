@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiService} from "../../helpers/api.service";
 
 @Component({
   selector: 'app-list-cars',
@@ -6,15 +7,44 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-cars.component.css']
 })
 export class ListCarsComponent implements OnInit {
-  cars = [
-    { brand: 'Toyota', model: 'Corolla', year: 2015 },
-    { brand: 'Ford', model: 'Focus', year: 2018 },
-    { brand: 'Honda', model: 'Civic', year: 2020 },
-    { brand: 'BMW', model: 'X5', year: 2021 }
-  ];
+    public cars = [];
+    public loading = true;
 
-  constructor() { }
+  constructor(private apiService: ApiService) {
+  }
 
   ngOnInit(): void {
+    this.getVehicles();
   }
+
+    getVehicles(): void {
+        this.apiService.get('/vehicle/list')
+            .subscribe({
+                next: (data) => {
+                    this.cars = data;
+                    this.loading = false;
+                },
+                error: () => {
+                }
+            });
+    }
+
+    deleteVehicle(id: number): void {
+        const confirmed = confirm('Czy na pewno chcesz usunąć pojazd o ID: ' + id + '?');
+
+        if (confirmed) {
+            this.apiService.delete(`/vehicle/delete/${id}`).subscribe({
+                next: () => {
+                    alert('Pojazd usunięty: ' + id);
+                    this.getVehicles();
+                },
+                error: (err) => {
+                    alert('Błąd podczas usuwania pojazdu');
+                }
+            });
+        } else {
+            alert('Usuwanie pojazdu anulowane.');
+        }
+    }
+
 }

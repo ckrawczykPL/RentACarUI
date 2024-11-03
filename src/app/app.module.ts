@@ -1,10 +1,13 @@
+// src/app/app.module.ts
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {ListModule} from "./list/list.module";
-import {FormModule} from "./form/form.module";
+import { ListModule } from './list/list.module';
+import { FormModule } from './form/form.module';
+import { HttpClientModule } from '@angular/common/http';
+import { LoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,9 @@ import {FormModule} from "./form/form.module";
     BrowserModule,
     ListModule,
     FormModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    LoadingModule.forRoot({})
   ],
   providers: [],
   bootstrap: [AppComponent]

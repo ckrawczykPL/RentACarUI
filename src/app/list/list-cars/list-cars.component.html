@@ -12,13 +12,13 @@
     </thead>
     <tbody>
     <tr *ngFor="let car of cars; let i = index">
-      <td>{{ i + 1 }}</td>
+      <td>{{ car.id }}</td>
       <td>{{ car.brand }}</td>
       <td>{{ car.model }}</td>
       <td>{{ car.year }}</td>
       <td>
         <button class="btn btn-primary btn-sm ml mr-2">Edytuj</button>
-        <button class="btn btn-danger btn-sm">Usuń</button>
+        <button class="btn btn-danger btn-sm" (click)="deleteVehicle(car.id)">Usuń</button>
       </td>
     </tr>
     <tr *ngIf="cars.length === 0">
@@ -27,3 +27,5 @@
     </tbody>
   </table>
 </div>
+
+<ngx-loading [show]="loading"></ngx-loading>
