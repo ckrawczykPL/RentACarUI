@@ -1,12 +1,20 @@
+// src/app/form/form.module.ts
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddRentCarComponent } from './add-rent-car/add-rent-car.component';
-import { EditRentCarComponent } from './edit-rent-car/edit-rent-car.component';
+import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
+import { FormRentCarComponent } from './form-rent-car/form-rent-car.component';
+import {FormRoutingModule} from "./form-routing.module";
+import {LoadingModule} from "ngx-loading";
 
 @NgModule({
-  declarations: [AddRentCarComponent, EditRentCarComponent],
+  declarations: [
+    FormRentCarComponent,
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
+    FormRoutingModule,
+    LoadingModule
   ]
 })
 export class FormModule { }
